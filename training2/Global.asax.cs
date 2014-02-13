@@ -5,7 +5,9 @@ using System.Web;
 using System.Web.Optimization;
 using System.Web.Routing;
 using System.Web.Security;
+using System.Web.SessionState;
 using training2;
+using System.Web.Http;
 
 namespace training2
 {
@@ -17,6 +19,9 @@ namespace training2
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AuthConfig.RegisterOpenAuth();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            RouteTable.Routes.MapHttpRoute(name: "DefaultApi",
+                routeTemplate: "api/{controller}/{id}",
+                defaults: new { id = System.Web.Http.RouteParameter.Optional });
         }
 
         void Application_End(object sender, EventArgs e)
